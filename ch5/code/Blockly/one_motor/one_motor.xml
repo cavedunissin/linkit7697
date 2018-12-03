@@ -1,0 +1,168 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="initializes_setup" id="7" x="-187" y="88">
+    <statement name="CONTENT">
+      <block type="linkit_ble_periphral" id="8" inline="false">
+        <value name="NAME">
+          <block type="text" id="9">
+            <field name="TEXT">LinkIt7697_BLE_Car</field>
+          </block>
+        </value>
+        <value name="SERVICE">
+          <block type="text" id="10">
+            <field name="TEXT">951A6899-6F0F-456F-8AE0-5E0B4352D85B</field>
+          </block>
+        </value>
+        <statement name="BLE_CONTENT">
+          <block type="linkit_ble_Characteristic" id="11" inline="false">
+            <field name="CHARACTERISTIC_TYPE">LBLECharacteristicInt</field>
+            <field name="TYPE">LBLE_READ | LBLE_WRITE</field>
+            <value name="CHARACTERISTIC">
+              <block type="text" id="12">
+                <field name="TEXT">B77D53AC-D590-41E0-B75A-6DA442F543F6</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="serial_println" id="13" inline="false">
+            <value name="CONTENT">
+              <block type="text" id="14">
+                <field name="TEXT">藍牙裝置建立成功</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="15">
+        <statement name="CONTENT">
+          <block type="controls_if" id="16" inline="false">
+            <value name="IF0">
+              <block type="linkit_ble_periphral_is_written" id="17" inline="true">
+                <value name="CHARACTERISTIC">
+                  <block type="text" id="18">
+                    <field name="TEXT">B77D53AC-D590-41E0-B75A-6DA442F543F6</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="19" inline="true">
+                <field name="TYPE">Number</field>
+                <field name="VAR">data</field>
+                <value name="VALUE">
+                  <block type="linkit_ble_periphral_get_value" id="20" inline="true">
+                    <value name="CHARACTERISTIC">
+                      <block type="text" id="21">
+                        <field name="TEXT">B77D53AC-D590-41E0-B75A-6DA442F543F6</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="22" inline="false">
+                    <mutation elseif="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="23" inline="true">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="24">
+                            <field name="TYPE">Number</field>
+                            <field name="VAR">data</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="25">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="serial_println" id="26" inline="false">
+                        <value name="CONTENT">
+                          <block type="text" id="27">
+                            <field name="TEXT">靜止</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="inout_digital_write" id="28">
+                            <field name="PIN">10</field>
+                            <field name="STAT">LOW</field>
+                            <next>
+                              <block type="inout_digital_write" id="29">
+                                <field name="PIN">12</field>
+                                <field name="STAT">LOW</field>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <value name="IF1">
+                      <block type="logic_compare" id="30" inline="true">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="31">
+                            <field name="TYPE">Number</field>
+                            <field name="VAR">data</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="32">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO1">
+                      <block type="serial_println" id="33" inline="false">
+                        <value name="CONTENT">
+                          <block type="text" id="34">
+                            <field name="TEXT">轉動</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="inout_digital_write" id="35">
+                            <field name="PIN">10</field>
+                            <field name="STAT">LOW</field>
+                            <next>
+                              <block type="inout_digital_write" id="36">
+                                <field name="PIN">12</field>
+                                <field name="STAT">HIGH</field>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="serial_println" id="37" inline="false">
+                        <value name="CONTENT">
+                          <block type="variables_get" id="39">
+                            <field name="TYPE">Number</field>
+                            <field name="VAR">data</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="delay_custom" id="51" inline="false">
+                            <value name="DELAY_TIME">
+                              <block type="math_number" id="52">
+                                <field name="NUM">100</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

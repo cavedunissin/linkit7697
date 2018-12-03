@@ -1,0 +1,79 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="initializes_setup" id="3" x="80" y="40">
+    <next>
+      <block type="initializes_loop" id="4">
+        <statement name="CONTENT">
+          <block type="controls_if" id="5" inline="false">
+            <mutation elseif="1" else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="6" inline="true">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="inout_digital_read" id="7">
+                    <field name="PIN">3</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_boolean" id="8">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="inout_digital_write" id="9">
+                <field name="PIN">7</field>
+                <field name="STAT">HIGH</field>
+                <next>
+                  <block type="inout_digital_write" id="16">
+                    <field name="PIN">8</field>
+                    <field name="STAT">LOW</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare" id="10" inline="true">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="inout_digital_read" id="11">
+                    <field name="PIN">4</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_boolean" id="12">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="inout_digital_write" id="17">
+                <field name="PIN">7</field>
+                <field name="STAT">HIGH</field>
+                <next>
+                  <block type="inout_digital_write" id="13">
+                    <field name="PIN">8</field>
+                    <field name="STAT">LOW</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="inout_digital_write" id="14">
+                <field name="PIN">7</field>
+                <field name="STAT">LOW</field>
+                <next>
+                  <block type="inout_digital_write" id="15">
+                    <field name="PIN">8</field>
+                    <field name="STAT">LOW</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

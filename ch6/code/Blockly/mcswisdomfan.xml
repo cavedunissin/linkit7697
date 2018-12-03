@@ -1,0 +1,453 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="initializes_setup" id="3" x="163" y="65">
+    <statement name="CONTENT">
+      <block type="serial_println" id="4" inline="false">
+        <value name="CONTENT">
+          <block type="text" id="5">
+            <field name="TEXT">開始連線</field>
+          </block>
+        </value>
+        <next>
+          <block type="linkit_wifi_wait_until_ready" id="6" inline="false">
+            <value name="SSID">
+              <block type="text" id="7">
+                <field name="TEXT">CAVEDU_02</field>
+              </block>
+            </value>
+            <value name="PASSWORD">
+              <block type="text" id="8">
+                <field name="TEXT">12345678</field>
+              </block>
+            </value>
+            <next>
+              <block type="mcs" id="9" inline="false">
+                <value name="DEVICEID">
+                  <block type="text" id="10">
+                    <field name="TEXT">D1eRZbQc</field>
+                  </block>
+                </value>
+                <value name="DEVICEKEY">
+                  <block type="text" id="11">
+                    <field name="TEXT">N0D62n4W3zHe0q2y</field>
+                  </block>
+                </value>
+                <statement name="CONTENT">
+                  <block type="mcs_set_control_channel" id="12" inline="true">
+                    <field name="TYPE">int</field>
+                    <value name="CONTROL_CHANNEL">
+                      <block type="text" id="13">
+                        <field name="TEXT">turn</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="mcs_set_control_channel" id="14" inline="true">
+                        <field name="TYPE">int</field>
+                        <value name="CONTROL_CHANNEL">
+                          <block type="text" id="15">
+                            <field name="TEXT">pwm</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="mcs_set_display_channel" id="16" inline="true">
+                            <field name="TYPE">float</field>
+                            <value name="DISPLAY_CHANNEL">
+                              <block type="text" id="17">
+                                <field name="TEXT">temp</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="serial_println" id="18" inline="false">
+                    <value name="CONTENT">
+                      <block type="text" id="19">
+                        <field name="TEXT">連線成功</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="initializes_loop" id="20" x="588" y="63">
+    <statement name="CONTENT">
+      <block type="mcs_process" id="21">
+        <next>
+          <block type="mcs_channel2_value" id="22" inline="true">
+            <value name="CHANNEL2_VALUE">
+              <block type="text" id="23">
+                <field name="TEXT">temp</field>
+              </block>
+            </value>
+            <value name="SET_VALUE">
+              <block type="grove_temporature_humidity_sensor" id="24">
+                <field name="PIN">2</field>
+                <field name="UNIT">c</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="25" inline="false">
+                <value name="IF0">
+                  <block type="mcs_channel_value" id="26" inline="true">
+                    <value name="CHANNEL_VALUE">
+                      <block type="text" id="27">
+                        <field name="TEXT">turn</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="serial_println" id="28" inline="false">
+                    <value name="CONTENT">
+                      <block type="mcs_channel_value" id="29" inline="true">
+                        <value name="CHANNEL_VALUE">
+                          <block type="text" id="30">
+                            <field name="TEXT">turn</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="31" inline="false">
+                        <mutation elseif="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="32" inline="true">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="mcs_channel_value" id="33" inline="true">
+                                <value name="CHANNEL_VALUE">
+                                  <block type="text" id="34">
+                                    <field name="TEXT">turn</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="35">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="serial_println" id="36" inline="false">
+                            <value name="CONTENT">
+                              <block type="text" id="37">
+                                <field name="TEXT">自動模式</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="serial_print" id="38" inline="false">
+                                <value name="CONTENT">
+                                  <block type="text" id="39">
+                                    <field name="TEXT">目前溫度:</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="serial_println" id="40" inline="false">
+                                    <value name="CONTENT">
+                                      <block type="grove_temporature_humidity_sensor" id="41">
+                                        <field name="PIN">2</field>
+                                        <field name="UNIT">c</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="controls_if" id="42" inline="false">
+                                        <mutation elseif="2"></mutation>
+                                        <value name="IF0">
+                                          <block type="logic_operation" id="43" inline="true">
+                                            <field name="OP">AND</field>
+                                            <value name="A">
+                                              <block type="logic_compare" id="44" inline="true">
+                                                <field name="OP">GTE</field>
+                                                <value name="A">
+                                                  <block type="grove_temporature_humidity_sensor" id="45">
+                                                    <field name="PIN">2</field>
+                                                    <field name="UNIT">c</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="46">
+                                                    <field name="NUM">25</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="logic_compare" id="47" inline="true">
+                                                <field name="OP">LT</field>
+                                                <value name="A">
+                                                  <block type="grove_temporature_humidity_sensor" id="48">
+                                                    <field name="PIN">2</field>
+                                                    <field name="UNIT">c</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="49">
+                                                    <field name="NUM">28</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="inout_custom_analog_write" id="50" inline="true">
+                                            <value name="PIN_ANALOGWRITE">
+                                              <block type="math_number" id="51">
+                                                <field name="NUM">4</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM">
+                                              <block type="math_number" id="52">
+                                                <field name="NUM">150</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="inout_custom_analog_write" id="53" inline="true">
+                                                <value name="PIN_ANALOGWRITE">
+                                                  <block type="math_number" id="54">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM">
+                                                  <block type="math_number" id="55">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <value name="IF1">
+                                          <block type="logic_operation" id="56" inline="true">
+                                            <field name="OP">AND</field>
+                                            <value name="A">
+                                              <block type="logic_compare" id="57" inline="true">
+                                                <field name="OP">GTE</field>
+                                                <value name="A">
+                                                  <block type="grove_temporature_humidity_sensor" id="58">
+                                                    <field name="PIN">2</field>
+                                                    <field name="UNIT">c</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="59">
+                                                    <field name="NUM">28</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="logic_compare" id="60" inline="true">
+                                                <field name="OP">LT</field>
+                                                <value name="A">
+                                                  <block type="grove_temporature_humidity_sensor" id="61">
+                                                    <field name="PIN">2</field>
+                                                    <field name="UNIT">c</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="62">
+                                                    <field name="NUM">30</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO1">
+                                          <block type="inout_custom_analog_write" id="63" inline="true">
+                                            <value name="PIN_ANALOGWRITE">
+                                              <block type="math_number" id="64">
+                                                <field name="NUM">4</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM">
+                                              <block type="math_number" id="65">
+                                                <field name="NUM">200</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="inout_custom_analog_write" id="66" inline="true">
+                                                <value name="PIN_ANALOGWRITE">
+                                                  <block type="math_number" id="67">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM">
+                                                  <block type="math_number" id="68">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <value name="IF2">
+                                          <block type="logic_compare" id="69" inline="true">
+                                            <field name="OP">GTE</field>
+                                            <value name="A">
+                                              <block type="grove_temporature_humidity_sensor" id="70">
+                                                <field name="PIN">2</field>
+                                                <field name="UNIT">c</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id="71">
+                                                <field name="NUM">30</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO2">
+                                          <block type="inout_custom_analog_write" id="72" inline="true">
+                                            <value name="PIN_ANALOGWRITE">
+                                              <block type="math_number" id="73">
+                                                <field name="NUM">4</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM">
+                                              <block type="math_number" id="74">
+                                                <field name="NUM">255</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="inout_custom_analog_write" id="75" inline="true">
+                                                <value name="PIN_ANALOGWRITE">
+                                                  <block type="math_number" id="76">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM">
+                                                  <block type="math_number" id="77">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <value name="IF1">
+                          <block type="logic_compare" id="78" inline="true">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="mcs_channel_value" id="79" inline="true">
+                                <value name="CHANNEL_VALUE">
+                                  <block type="text" id="80">
+                                    <field name="TEXT">turn</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="81">
+                                <field name="NUM">2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO1">
+                          <block type="serial_println" id="82" inline="false">
+                            <value name="CONTENT">
+                              <block type="text" id="83">
+                                <field name="TEXT">手動模式</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_if" id="84" inline="false">
+                                <value name="IF0">
+                                  <block type="mcs_channel_value" id="85" inline="true">
+                                    <value name="CHANNEL_VALUE">
+                                      <block type="text" id="86">
+                                        <field name="TEXT">pwm</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="serial_print" id="87" inline="false">
+                                    <value name="CONTENT">
+                                      <block type="text" id="88">
+                                        <field name="TEXT">目前通道數值:</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="serial_println" id="89" inline="false">
+                                        <value name="CONTENT">
+                                          <block type="mcs_channel_value" id="90" inline="true">
+                                            <value name="CHANNEL_VALUE">
+                                              <block type="text" id="91">
+                                                <field name="TEXT">pwm</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="inout_custom_analog_write" id="92" inline="true">
+                                            <value name="PIN_ANALOGWRITE">
+                                              <block type="math_number" id="93">
+                                                <field name="NUM">4</field>
+                                              </block>
+                                            </value>
+                                            <value name="NUM">
+                                              <block type="mcs_channel_value" id="94" inline="true">
+                                                <value name="CHANNEL_VALUE">
+                                                  <block type="text" id="95">
+                                                    <field name="TEXT">pwm</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="inout_custom_analog_write" id="96" inline="true">
+                                                <value name="PIN_ANALOGWRITE">
+                                                  <block type="math_number" id="97">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NUM">
+                                                  <block type="math_number" id="98">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

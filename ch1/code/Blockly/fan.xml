@@ -1,0 +1,153 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="initializes_setup" id="3" x="63" y="13">
+    <statement name="CONTENT">
+      <block type="variables_set" id="4" inline="true">
+        <field name="TYPE">Boolean</field>
+        <field name="VAR">fan</field>
+        <value name="VALUE">
+          <block type="logic_boolean" id="5">
+            <field name="BOOL">FALSE</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="6">
+        <statement name="CONTENT">
+          <block type="controls_if" id="7" inline="false">
+            <value name="IF0">
+              <block type="inout_digital_read" id="8">
+                <field name="PIN">6</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_if" id="9" inline="false">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="variables_get" id="10">
+                    <field name="TYPE">Boolean</field>
+                    <field name="VAR">fan</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="11" inline="true">
+                    <field name="TYPE">Boolean</field>
+                    <field name="VAR">fan</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="12">
+                        <field name="BOOL">FALSE</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="variables_set" id="13" inline="true">
+                    <field name="TYPE">Boolean</field>
+                    <field name="VAR">fan</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="14">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="delay_custom" id="15" inline="false">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="16">
+                        <field name="NUM">100</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="17" inline="false">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="variables_get" id="18">
+                    <field name="TYPE">Boolean</field>
+                    <field name="VAR">fan</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="inout_analog_write" id="37" inline="true">
+                    <field name="PIN">4</field>
+                    <value name="NUM">
+                      <block type="math_number" id="38">
+                        <field name="NUM">255</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="inout_analog_write" id="39" inline="true">
+                        <field name="PIN">5</field>
+                        <value name="NUM">
+                          <block type="math_number" id="40">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="serial_println" id="21" inline="false">
+                            <value name="CONTENT">
+                              <block type="text" id="22">
+                                <field name="TEXT">開啟風扇</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="inout_analog_write" id="41" inline="true">
+                    <field name="PIN">4</field>
+                    <value name="NUM">
+                      <block type="math_number" id="42">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="inout_analog_write" id="43" inline="true">
+                        <field name="PIN">5</field>
+                        <value name="NUM">
+                          <block type="math_number" id="44">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="serial_println" id="25" inline="false">
+                            <value name="CONTENT">
+                              <block type="text" id="26">
+                                <field name="TEXT">關閉風扇</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="delay_custom" id="27" inline="false">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="28">
+                        <field name="NUM">100</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="initializes_setup" id="1" x="80" y="40">
+    <next>
+      <block type="initializes_loop" id="2"></block>
+    </next>
+  </block>
+</xml>
